@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlazorStaticPrerender</title>
-    <meta name="description" content="Exemple de Blazor WebAssembly avec pré-rendu statique pour GitHub Pages et SEO optimisé." />
+    <meta name="description" content="Blazor WebAssembly optimisé" />
     <base href="/BlazorStaticPrerender/" />
+    
     <script>
-        // Change base href if local developpement
         (function() {
             var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '';
             if (isLocal && location.pathname === '/') {
@@ -17,28 +16,94 @@
             }
         })();
     </script>
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link href="BlazorStaticPrerender.styles.css" rel="stylesheet" />
+    
 </head>
-
 <body>
-    <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
-
+    <!-- Static shell that renders immediately -->
+    <div id="static-shell" class="shell">
+        test
+        <!--<div class="header">
+            <h1>Mon Site</h1>
+        </div>-->
+    
     </div>
-
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="." class="reload">Reload</a>
+    
+    <!-- Hidden loading indicator -->
+    <!--<div id="loading-indicator" class="loading hidden">
+        <div class="spinner"></div>
+        <div>Chargement de l'application...</div>
+    </div>-->
+    
+    <!-- Blazor container (hidden initially) -->
+    <div id="app" class="hidden"></div>
+    
+    <!-- Error UI -->
+    <!--<div id="blazor-error-ui" class="hidden">
+        Erreur de chargement
+        <a href="." class="reload">Recharger</a>
         <span class="dismiss">🗙</span>
-    </div>
-    <script src="_framework/blazor.webassembly.js"></script>
-</body>
+    </div>-->
+    
+    <!-- Blazor control script -->
+    <script>
+        let blazorLoaded = false;
+        
+        // Show loading when user tries to interact
+        document.addEventListener('click', function(e) {
+            if (!blazorLoaded && (e.target.tagName === 'A' || e.target.closest('a'))) {
+                e.preventDefault();
+                showLoading();
+                loadBlazor();
+            }
+        });
+        
+        function showLoading() {
+            document.getElementById('loading-indicator').classList.remove('hidden');
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading-indicator').classList.add('hidden');
+        }
+        
+        function loadBlazor() {
+            if (blazorLoaded) return;
+            blazorLoaded = true;
+            
+            // Load Blazor script
+            const script = document.createElement('script');
+            script.src = '_framework/blazor.webassembly.js';
+            script.onload = function() {
+                // Blazor will call blazorReady when it's done
+            };
+            document.head.appendChild(script);
+            
+            // Load CSS
+            const cssFiles = [
+                'lib/bootstrap/dist/css/bootstrap.min.css',
+                'css/app.css',
+                'BlazorStaticPrerender.styles.css'
+            ];
+            
+            cssFiles.forEach(href => {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = href;
+                document.head.appendChild(link);
+            });
+        }
+        
+        window.blazorReady = function() {
+            hideLoading();
+            document.getElementById('static-shell').classList.add('hidden');
+            document.getElementById('app').classList.remove('hidden');
+        };
+        
 
+        setTimeout(function() {
+            if (!blazorLoaded) {
+                loadBlazor();
+            }
+        }, 2000);
+    </script>
+</body>
 </html>
