@@ -4,6 +4,16 @@
     <title>BlazorStaticPrerender</title>
     <meta name="description" content="Exemple de Blazor WebAssembly avec pré-rendu statique pour GitHub Pages et SEO optimisé."/>
     <base href="/BlazorStaticPrerender/"/>
+    <script>
+        // Change base href if local developpement
+        (function() {
+            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '';
+            if (isLocal && location.pathname === '/') {
+                var base = document.querySelector('base');
+                if (base) base.setAttribute('href', '/');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="icon" type="image/png" href="favicon.png"/>
@@ -16,15 +26,12 @@
 
 <body>
     <div id="app">
-        <main>
-            <h1>Welcome to Salsa Contigo!</h1>
-            <p>This site is a complete example of Blazor WebAssembly with static prerendering, ready for deployment on GitHub Pages and optimized for SEO.</p>
-            <ul>
-                <li>100% static deployment, no server</li>
-                <li>Client-side routing (SPA) support</li>
-                <li>Custom SEO tags per page</li>
-            </ul>
-        </main>
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%"></circle>
+            <circle r="40%" cx="50%" cy="50%"></circle>
+        </svg>
+        <div class="loading-progress-text"></div>
+
     
 <!-- %%-PRERENDERING-BEGIN-%% -->
 <div style="opacity: 0; position: fixed; z-index: -1; top: 0; left: 0; bottom: 0; right: 0;">
