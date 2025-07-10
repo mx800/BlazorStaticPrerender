@@ -7,6 +7,16 @@
     <title>BlazorStaticPrerender</title>
     <meta name="description" content="Exemple de Blazor WebAssembly avec pré-rendu statique pour GitHub Pages et SEO optimisé." />
     <base href="/BlazorStaticPrerender/" />
+    <script>
+        // Change base href if local developpement
+        (function() {
+            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '';
+            if (isLocal && location.pathname === '/') {
+                var base = document.querySelector('base');
+                if (base) base.setAttribute('href', '/');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
