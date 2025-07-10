@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BlazorStaticPrerender</title>
+    <meta name="description" content="Exemple de Blazor WebAssembly avec pré-rendu statique pour GitHub Pages et SEO optimisé."/>
+    <base href="/"/>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link href="BlazorStaticPrerender.styles.css" rel="stylesheet"/>
+
+<!-- %%-PRERENDERING-HEADOUTLET-BEGIN-%% -->
+<title>Accueil - Salsa Contigo</title><meta name="description" content="Découvrez Salsa Contigo, votre site d'exemple Blazor WebAssembly pré-rendu statiquement, optimisé pour le SEO et déployable sur GitHub Pages sans serveur.">
+    <meta name="keywords" content="Blazor, WebAssembly, Prerendering, SEO, GitHub Pages, Exemple">
+<!-- %%-PRERENDERING-HEADOUTLET-END-%% -->
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%"></circle>
+            <circle r="40%" cx="50%" cy="50%"></circle>
+        </svg>
+        <div class="loading-progress-text"></div>
+    
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<div style="opacity: 0; position: fixed; z-index: -1; top: 0; left: 0; bottom: 0; right: 0;">
+    <div class="page" b-cipr8rhyyq><div class="sidebar" b-cipr8rhyyq><div class="top-row ps-3 navbar navbar-dark" b-tw6nthw159><div class="container-fluid" b-tw6nthw159><a class="navbar-brand" href b-tw6nthw159>BlazorStaticPrerender</a>
+        <button title="Navigation menu" class="navbar-toggler" b-tw6nthw159><span class="navbar-toggler-icon" b-tw6nthw159></span></button></div></div>
+
+<div class="collapse nav-scrollable" b-tw6nthw159><nav class="nav flex-column" b-tw6nthw159><div class="nav-item px-3" b-tw6nthw159><a href="" class="nav-link active" aria-current="page"><span class="bi bi-house-door-fill-nav-menu" aria-hidden="true" b-tw6nthw159></span> Home
+            </a></div>
+        <div class="nav-item px-3" b-tw6nthw159><a href="counter" class="nav-link"><span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true" b-tw6nthw159></span> Counter
+            </a></div>
+        <div class="nav-item px-3" b-tw6nthw159><a href="weather" class="nav-link"><span class="bi bi-list-nested-nav-menu" aria-hidden="true" b-tw6nthw159></span> Weather
+            </a></div></nav></div></div>
+
+    <main b-cipr8rhyyq><div class="top-row px-4" b-cipr8rhyyq><a href="https://learn.microsoft.com/aspnet/core/" target="_blank" b-cipr8rhyyq>About</a></div>
+
+        <article class="content px-4" b-cipr8rhyyq>
+
+
+<h1>Bienvenue sur Salsa Contigo !</h1>
+
+<p>Ce site est un exemple complet de Blazor WebAssembly avec pré-rendu statique, prêt pour un déploiement sur GitHub Pages et optimisé pour le référencement naturel (SEO).</p>
+
+<ul><li>Déploiement 100% statique, sans serveur</li>
+    <li>Prise en charge du routage client (SPA)</li>
+    <li>Balises SEO personnalisées par page</li></ul></article></main></div>
+        <blazor-focus-on-navigate selector="h1"></blazor-focus-on-navigate>
+
+</div>
+<!-- %%-PRERENDERING-END-%% -->
+</div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+
+
+
+</body></html>
