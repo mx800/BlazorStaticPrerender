@@ -1,16 +1,16 @@
-# Nettoie les anciens fichiers statiques à la racine (hors dossiers source)
-Remove-Item -Recurse -Force _framework, css, lib, BlazorStaticPrerender.styles.css, favicon.png, index.html, manifest.webmanifest, service-worker.js, service-worker.published.js, .nojekyll, 404.html -ErrorAction SilentlyContinue
+# Delete old publish
+Remove-Item -Recurse -Force docs -ErrorAction SilentlyContinue
 
-# Publie le projet dans un dossier temporaire
-dotnet publish -c Release -o publish-temp
+# Publish
+dotnet publish -c Release -o docs
 
-# Copie le contenu de wwwroot à la racine du projet
-Copy-Item -Recurse publish-temp\wwwroot\* .\
+# Format folder
+Copy-Item -Recurse docs\wwwroot\* docs\
 
-# Ajoute le fichier .nojekyll
-New-Item -ItemType File -Path .nojekyll -Force
+# Add .nojekyll
+New-Item -ItemType File -Path docs\.nojekyll
 
 # Supprime les fichiers/dossiers inutiles
-Remove-Item publish-temp -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item BlazorStaticPrerender.staticwebassets.endpoints.json -ErrorAction SilentlyContinue
-Remove-Item web.config -ErrorAction SilentlyContinue
+Remove-Item docs\web.config -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force docs/wwwroot -ErrorAction SilentlyContinue
+Remove-Item docs\BlazorStaticPrerender.staticwebassets.endpoints.json -ErrorAction SilentlyContinue  
