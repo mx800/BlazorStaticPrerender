@@ -51,6 +51,7 @@
             const script = document.createElement('script');
             script.src = '_framework/blazor.webassembly.js';
             script.async = true;
+            script.setAttribute('autostart', 'true');
             document.head.appendChild(script);
         }
 
@@ -70,7 +71,6 @@
         }
 
         window.blazorReady = function () {
-            console.log("ready");
             document.getElementById('app').style.visibility = 'visible';
             document.getElementById('blazor-error-ui').style.visibility = 'visible';
         };
@@ -79,10 +79,9 @@
             loadCss();
             setTimeout(function () {
                 if (!blazorLoaded) {
-                    console.log("render");
                     loadBlazor();
                 }
-            }, 0);
+            }, 1600);
         });
     </script>
 </body>
