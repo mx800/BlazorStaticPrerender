@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlazorStaticPrerender</title>
     <meta name="description" content="Blazor WebAssembly optimisé" />
-    <base href="/" />
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link href="BlazorStaticPrerender.styles.css" rel="stylesheet" />
-
+    <base href="/BlazorStaticPrerender/" />
+    
     <script>
-        (function () {
-            const developmentHostnames = ['localhost', '127.0.0.1'];
-            const productionBasePath = '/BlazorStaticPrerender/';
-
-            if (!developmentHostnames.includes(location.hostname)) {
-                document.querySelector('base').href = productionBasePath;
+        (function() {
+            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            if (isLocal && location.pathname === '/') {
+                var base = document.querySelector('base');
+                if (base) base.setAttribute('href', '/');
             }
         })();
     </script>
-
+    
 </head>
 <body>
     <!-- Static shell that renders immediately -->
@@ -39,46 +34,46 @@
     <div id="app" style="visibility:hidden"></div>
     
     <!-- Error UI -->
-    <!--<div id="blazor-error-ui" class="hidden">
+    <div id="blazor-error-ui" style="visibility:hidden">
         Erreur de chargement
         <a href="." class="reload">Recharger</a>
         <span class="dismiss">🗙</span>
-    </div>-->
+    </div>
     
     <!-- Blazor control script -->
     <script>
         let blazorLoaded = false;
-        
-        // Show loading when user tries to interact
-        document.addEventListener('click', function(e) {
-            if (!blazorLoaded) {
-                e.preventDefault();
-             //   document.getElementById('loading-indicator').classList.remove('hidden');
-                loadBlazor();
-            }
-        });
-             
+
         function loadBlazor() {
             if (blazorLoaded) return;
             blazorLoaded = true;
             
+            // Load Blazor script
             const script = document.createElement('script');
             script.src = '_framework/blazor.webassembly.js';
             document.head.appendChild(script);
+            
+            // Load CSS
+            const cssFiles = [
+                'lib/bootstrap/dist/css/bootstrap.min.css',
+                'css/app.css',
+                'BlazorStaticPrerender.styles.css'
+            ];
+            
+            cssFiles.forEach(href => {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = href;
+                document.head.appendChild(link);
+            });
         }
         
         window.blazorReady = function () {
-            //document.getElementById('loading-indicator').classList.add('hidden');
-            //document.getElementById('static-shell').classList.add('hidden');
             document.getElementById('app').style.visibility = 'visible';
+            document.getElementById('blazor-error-ui').style.visibility = 'visible';
         };
         
-
-        setTimeout(function() {
-            if (!blazorLoaded) {
-                loadBlazor();
-            }
-        }, 0);
+        loadBlazor();
     </script>
 </body>
 </html>
