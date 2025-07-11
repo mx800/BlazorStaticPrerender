@@ -11,11 +11,6 @@
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains"/>
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin"/>
 
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/app.css"/>
-    <link rel="icon" type="image/png" href="favicon.png"/>
-    <link href="BlazorStaticPrerender.styles.css" rel="stylesheet"/>
-
     <script>
         (function () {
             var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
@@ -68,7 +63,7 @@
     </div>
 
     <!-- Blazor control script -->
-    <!--<script>
+    <script>
         let blazorLoaded = false;
 
         function loadBlazor() {
@@ -77,7 +72,6 @@
 
             const script = document.createElement('script');
             script.src = '_framework/blazor.webassembly.js';
-            script.async = true;
             script.setAttribute('autostart', 'true');
             document.head.appendChild(script);
         }
@@ -123,7 +117,6 @@
 
             const timeoutId = setTimeout(() => triggerBlazorLoad(), 2000);
         });
-    </script>-->
-    <script src="_framework/blazor.webassembly.js"></script>
+    </script>
 
 </body></html>
