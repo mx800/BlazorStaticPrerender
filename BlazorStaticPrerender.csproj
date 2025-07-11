@@ -7,8 +7,8 @@
     <!-- Active le prerendering statique -->
     <BlazorWasmPrerenderingBuild>true</BlazorWasmPrerenderingBuild>
     <BlazorWasmPrerenderingBasePath>/</BlazorWasmPrerenderingBasePath>
-    <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>full</TrimMode>
+    <!--<PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>full</TrimMode>-->
   </PropertyGroup>
 
   <ItemGroup>
