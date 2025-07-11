@@ -48,12 +48,13 @@
             if (blazorLoaded) return;
             blazorLoaded = true;
 
-            // Load Blazor script
             const script = document.createElement('script');
             script.src = '_framework/blazor.webassembly.js';
+            script.async = true;
             document.head.appendChild(script);
+        }
 
-            // Load CSS
+        function loadCss() {
             const cssFiles = [
                 'lib/bootstrap/dist/css/bootstrap.min.css',
                 'css/app.css',
@@ -69,16 +70,19 @@
         }
 
         window.blazorReady = function () {
+            console.log("ready");
             document.getElementById('app').style.visibility = 'visible';
             document.getElementById('blazor-error-ui').style.visibility = 'visible';
         };
 
         document.addEventListener('DOMContentLoaded', function () {
+            loadCss();
             setTimeout(function () {
                 if (!blazorLoaded) {
+                    console.log("render");
                     loadBlazor();
                 }
-            }, 2000);
+            }, 0);
         });
     </script>
 </body>

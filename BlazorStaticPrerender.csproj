@@ -8,6 +8,7 @@
     <BlazorWasmPrerenderingBuild>true</BlazorWasmPrerenderingBuild>
     <BlazorWasmPrerenderingBasePath>/</BlazorWasmPrerenderingBasePath>
     <RunAOTCompilation>true</RunAOTCompilation>
+    <BlazorWebAssemblyEnableAOT>true</BlazorWebAssemblyEnableAOT>
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>full</TrimMode>
   </PropertyGroup>
