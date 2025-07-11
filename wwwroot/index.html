@@ -5,27 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlazorStaticPrerender</title>
     <meta name="description" content="Blazor WebAssembly optimisé" />
-    <base href="/BlazorStaticPrerender/" />
-    
-    <script>
-        (function() {
-            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '';
-            if (isLocal && location.pathname === '/') {
-                var base = document.querySelector('base');
-                if (base) base.setAttribute('href', '/');
-            }
-        })();
-    </script>
-    
+    <base href="/" />
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="BlazorStaticPrerender.styles.css" rel="stylesheet" />
 </head>
 <body>
     <!-- Static shell that renders immediately -->
     <div id="static-shell" class="shell">
         test
-        <!--<div class="header">
-            <h1>Mon Site</h1>
-        </div>-->
-    
     </div>
     
     <!-- Hidden loading indicator -->
@@ -35,7 +24,7 @@
     </div>-->
     
     <!-- Blazor container (hidden initially) -->
-    <div id="app" class="hidden"></div>
+    <div id="app" style="visibility:hidden"></div>
     
     <!-- Error UI -->
     <!--<div id="blazor-error-ui" class="hidden">
@@ -50,52 +39,26 @@
         
         // Show loading when user tries to interact
         document.addEventListener('click', function(e) {
-            if (!blazorLoaded && (e.target.tagName === 'A' || e.target.closest('a'))) {
+            if (!blazorLoaded) {
                 e.preventDefault();
-                showLoading();
+             //   document.getElementById('loading-indicator').classList.remove('hidden');
                 loadBlazor();
             }
         });
-        
-        function showLoading() {
-            document.getElementById('loading-indicator').classList.remove('hidden');
-        }
-        
-        function hideLoading() {
-            document.getElementById('loading-indicator').classList.add('hidden');
-        }
-        
+             
         function loadBlazor() {
             if (blazorLoaded) return;
             blazorLoaded = true;
             
-            // Load Blazor script
             const script = document.createElement('script');
             script.src = '_framework/blazor.webassembly.js';
-            script.onload = function() {
-                // Blazor will call blazorReady when it's done
-            };
             document.head.appendChild(script);
-            
-            // Load CSS
-            const cssFiles = [
-                'lib/bootstrap/dist/css/bootstrap.min.css',
-                'css/app.css',
-                'BlazorStaticPrerender.styles.css'
-            ];
-            
-            cssFiles.forEach(href => {
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = href;
-                document.head.appendChild(link);
-            });
         }
         
-        window.blazorReady = function() {
-            hideLoading();
-            document.getElementById('static-shell').classList.add('hidden');
-            document.getElementById('app').classList.remove('hidden');
+        window.blazorReady = function () {
+            //document.getElementById('loading-indicator').classList.add('hidden');
+            //document.getElementById('static-shell').classList.add('hidden');
+            document.getElementById('app').style.visibility = 'visible';
         };
         
 
@@ -103,7 +66,7 @@
             if (!blazorLoaded) {
                 loadBlazor();
             }
-        }, 2000);
+        }, 0);
     </script>
 </body>
 </html>
