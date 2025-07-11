@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="BlazorStaticPrerender.styles.css" rel="stylesheet" />
+
+    <script>
+        (function () {
+            const developmentHostnames = ['localhost', '127.0.0.1'];
+            const productionBasePath = '/BlazorStaticPrerender/';
+
+            if (!developmentHostnames.includes(location.hostname)) {
+                document.querySelector('base').href = productionBasePath;
+            }
+        })();
+    </script>
+
 </head>
 <body>
     <!-- Static shell that renders immediately -->
