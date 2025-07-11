@@ -4,7 +4,6 @@
     <title>BlazorStaticPrerender</title>
     <meta name="description" content="Blazor WebAssembly optimisé"/>
     <base href="/BlazorStaticPrerender/"/>
-    <script src="https://unpkg.com/brotli-dec-wasm@1.3.3/index.js"></script>
 
     <!-- Security headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self';"/>
@@ -119,31 +118,6 @@
 
             const timeoutId = setTimeout(() => triggerBlazorLoad(), 2000);
         });
-
-        (async () => {
-            const brotli = await BrotliDecWasm();
-            const originalFetch = fetch;
-
-            window.fetch = async (url, options) => {
-                const requestUrl = new URL(url, window.location.origin);
-                if (requestUrl.pathname.match(/\.(dat|dll|wasm|json)$/)) {
-                    console.log("tesssssssssssssss")
-                    const compressedUrl = requestUrl.href + '.br';
-                    const compressedResponse = await originalFetch(compressedUrl, options);
-
-                    if (compressedResponse.ok) {
-                        const compressedBuffer = await compressedResponse.arrayBuffer();
-                        const decompressedBuffer = brotli.decompress(new Uint8Array(compressedBuffer));
-
-                        return new Response(decompressedBuffer, {
-                            headers: { 'Content-Type': compressedResponse.headers.get('Content-Type') }
-                        });
-                    }
-                }
-
-                return originalFetch(url, options);
-            };
-        })();
     </script>
 
 </body></html>
