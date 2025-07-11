@@ -77,11 +77,24 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             loadCss();
-            setTimeout(function () {
-                if (!blazorLoaded) {
-                    loadBlazor();
+
+            let loadTriggered = false;
+
+            const triggerBlazorLoad = () => {
+
+                if (loadTriggered) {
+                    return;
                 }
-            }, 1600);
+                loadTriggered = true;
+
+                clearTimeout(timeoutId);
+                loadBlazor();
+            };
+
+            const events = ['scroll', 'mouseover', 'touchstart', 'focus'];
+            events.forEach(e => window.addEventListener(e, () => triggerBlazorLoad(), { once: true, passive: true }));
+
+            const timeoutId = setTimeout(() => triggerBlazorLoad(), 2000);
         });
     </script>
 </body>
