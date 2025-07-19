@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>BlazorStaticPrerender</title>
     <meta name="description" content="Blazor WebAssembly optimisé"/>
-    <base href=\"/BlazorStaticPrerender/\" />
+    <base href="/"/>
 
     <!-- Security headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self';"/>
@@ -17,8 +17,7 @@
     <link href="BlazorStaticPrerender.styles.css" rel="stylesheet"/>
 
 <!-- %%-PRERENDERING-HEADOUTLET-BEGIN-%% -->
-<title>Home - Salsa Contigo</title><meta name="description" content="Discover Salsa Contigo, your sample Blazor WebAssembly site with static prerendering, SEO optimized and deployable on GitHub Pages without a server.">
-    <meta name="keywords" content="Blazor, WebAssembly, Prerendering, SEO, GitHub Pages, Example">
+<title>Counter</title>
 <!-- %%-PRERENDERING-HEADOUTLET-END-%% -->
 </head>
 <body>
@@ -35,9 +34,9 @@
     <div class="page" b-cipr8rhyyq><div class="sidebar" b-cipr8rhyyq><div class="top-row ps-3 navbar navbar-dark" b-tw6nthw159><div class="container-fluid" b-tw6nthw159><a class="navbar-brand" href b-tw6nthw159>BlazorStaticPrerender</a>
         <button title="Navigation menu" class="navbar-toggler" b-tw6nthw159><span class="navbar-toggler-icon" b-tw6nthw159></span></button></div></div>
 
-<div class="collapse nav-scrollable" b-tw6nthw159><nav class="nav flex-column" b-tw6nthw159><div class="nav-item px-3" b-tw6nthw159><a href="" class="nav-link active" aria-current="page"><span class="bi bi-house-door-fill-nav-menu" aria-hidden="true" b-tw6nthw159></span> Home
+<div class="collapse nav-scrollable" b-tw6nthw159><nav class="nav flex-column" b-tw6nthw159><div class="nav-item px-3" b-tw6nthw159><a href="" class="nav-link"><span class="bi bi-house-door-fill-nav-menu" aria-hidden="true" b-tw6nthw159></span> Home
             </a></div>
-        <div class="nav-item px-3" b-tw6nthw159><a href="counter" class="nav-link"><span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true" b-tw6nthw159></span> Counter
+        <div class="nav-item px-3" b-tw6nthw159><a href="counter" class="nav-link active" aria-current="page"><span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true" b-tw6nthw159></span> Counter
             </a></div>
         <div class="nav-item px-3" b-tw6nthw159><a href="weather" class="nav-link"><span class="bi bi-list-nested-nav-menu" aria-hidden="true" b-tw6nthw159></span> Weather
             </a></div></nav></div></div>
@@ -46,14 +45,11 @@
 
         <article class="content px-4" b-cipr8rhyyq>
 
+<h1>Counter</h1>
 
-<h1>Welcome to Salsa Contigo!</h1>
+<p role="status">Current count: 0</p>
 
-<p>This site is a complete example of Blazor WebAssembly with static prerendering, ready for deployment on GitHub Pages and optimized for SEO.</p>
-
-<ul><li>100% static deployment, no server</li>
-    <li>Client-side routing (SPA) support</li>
-    <li>Custom SEO tags per page</li></ul></article></main></div>
+<button class="btn btn-primary">Click me</button></article></main></div>
         <blazor-focus-on-navigate selector="h1"></blazor-focus-on-navigate>
 
 </div>
