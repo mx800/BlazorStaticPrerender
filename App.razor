@@ -13,20 +13,3 @@
         </LayoutView>
     </NotFound>
 </Router>
-
-@code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await JSRuntime.InvokeVoidAsync("blazorReady");
-            }
-            catch (JSException)
-            {
-                // Ignore if function doesn't exist
-            }
-        }
-    }
-}

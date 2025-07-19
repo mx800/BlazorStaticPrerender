@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlazorStaticPrerender</title>
     <meta name="description" content="Blazor WebAssembly optimisé" />
-    <base href="/BlazorStaticPrerender/" />
+    <base href="/" />
 
     <!-- Security headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self';">
@@ -13,88 +13,26 @@
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
 
-    <script>
-        (function () {
-            var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-            if (isLocal && location.pathname === '/') {
-                var base = document.querySelector('base');
-                if (base) base.setAttribute('href', '/');
-            }
-        })();
-    </script>
-
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="BlazorStaticPrerender.styles.css" rel="stylesheet" />
 </head>
 <body>
-    <!-- Static shell that renders immediately -->
-    <div id="static-shell" class="shell">
-        test
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+
     </div>
 
-    <!-- Blazor container (hidden initially) -->
-    <div id="app" style="visibility:hidden"></div>
-
-    <!-- Error UI -->
-    <div id="blazor-error-ui" style="visibility:hidden">
-        Erreur de chargement
-        <a href="." class="reload">Recharger</a>
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
-
-    <!-- Blazor control script -->
-    <script>
-        let blazorLoaded = false;
-
-        function loadBlazor() {
-            if (blazorLoaded) return;
-            blazorLoaded = true;
-
-            const script = document.createElement('script');
-            script.src = '_framework/blazor.webassembly.js';
-            script.setAttribute('autostart', 'true');
-            document.head.appendChild(script);
-        }
-
-        function loadCss() {
-            const cssFiles = [
-                'lib/bootstrap/dist/css/bootstrap.min.css',
-                'css/app.css',
-                'BlazorStaticPrerender.styles.css'
-            ];
-
-            cssFiles.forEach(href => {
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = href;
-                document.head.appendChild(link);
-            });
-        }
-
-        window.blazorReady = function () {
-            document.getElementById('app').style.visibility = 'visible';
-            document.getElementById('blazor-error-ui').style.visibility = 'visible';
-        };
-
-        document.addEventListener('DOMContentLoaded', function () {
-            loadCss();
-
-            let loadTriggered = false;
-
-            const triggerBlazorLoad = () => {
-
-                if (loadTriggered) {
-                    return;
-                }
-                loadTriggered = true;
-
-                clearTimeout(timeoutId);
-                loadBlazor();
-            };
-
-            const events = ['scroll', 'mouseover', 'touchstart', 'focus'];
-            events.forEach(e => window.addEventListener(e, () => triggerBlazorLoad(), { once: true, passive: true }));
-
-            const timeoutId = setTimeout(() => triggerBlazorLoad(), 2000);
-        });
-    </script>
+    <script src="_framework/blazor.webassembly.js"></script>
 </body>
 </html>
